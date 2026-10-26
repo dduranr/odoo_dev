@@ -1,0 +1,23 @@
+services:
+  web:
+    image: odoo:20.0
+    container_name: odoo_dev_web
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=shared_postgres_18
+      - USER=odoo
+      - PASSWORD=odoo_password
+    volumes:
+      - odoo-dev-data:/var/lib/odoo
+      - ./custom-addons:/mnt/extra-addons
+    networks:
+      - red-postgres-18
+    restart: always
+
+volumes:
+  odoo-dev-data:
+
+networks:
+  red-postgres-18:
+    external: true
