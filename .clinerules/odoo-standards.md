@@ -1,0 +1,1 @@
+/Users/duran/Projects/www/odoo-dev/.ia/steering-docs/odoo-standards.md
