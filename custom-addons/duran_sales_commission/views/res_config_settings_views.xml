@@ -7,13 +7,17 @@
         <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//block[@name='catalog_setting_container']" position="inside">
-                <setting id="default_commission_percentage_setting" 
+                <setting id="sale_commission_percentage_setting" 
                          help="Porcentaje de comisión general aplicable por defecto a todos los productos y servicios.">
-                    <field name="default_commission_percentage" widget="percentage"/>
+                    <field name="sale_commission_percentage"/>
                 </setting>
             </xpath>
         </field>
     </record>
 
 </odoo>
+
+
+
+
 

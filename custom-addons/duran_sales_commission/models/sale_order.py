@@ -43,9 +43,6 @@ class SaleOrderLine(models.Model):
                     percentage = company.default_commission_percentage
 
             # Solo calcular el monto efectivo si la orden está confirmada ('sale') o en estado 'done'
-            # (En borrador / cotización se puede mostrar el porcentaje estimado pero el monto se calcula o se muestra)
-            # Requerimiento: "calcular automáticamente la comisión del vendedor solo cuando la venta se complete (estado confirmado/facturado)"
-            # Consideramos 'sale' o 'done' (o facturado).
             if line.order_id.state in ['sale', 'done']:
                 subtotal = line.price_subtotal or 0.0
                 amount = subtotal * (percentage / 100.0)
@@ -73,14 +70,21 @@ class SaleOrder(models.Model):
         help='Porcentaje promedio de comisión en la transacción.'
     )
 
-    @api.depends('order_line.commission_amount', 'amount_untaxed', 'state')
+    @api.depends('order_line.commission_amount', 'order_line.price_subtotal', 'order_line.commission_percentage', 'amount_untaxed', 'state')
     def _compute_order_commission(self):
         """Calcula el total de comisión y la tasa ponderada de la orden de venta."""
         for order in self:
             total_comm = sum(order.order_line.mapped('commission_amount'))
             order.commission_total = total_comm
             
+            # Cálculo de la comisión ponderada correcta:
+            # Sumatoria de (subtotal * porcentaje) / amount_untaxed
+            total_weighted = sum(
+                (line.price_subtotal or 0.0) * (line.commission_percentage or 0.0)
+                for line in order.order_line
+            )
             if order.amount_untaxed and order.amount_untaxed > 0:
-                order.commission_rate = (total_comm / order.amount_untaxed) * 100.0
+                order.commission_rate = total_weighted / order.amount_untaxed
             else:
                 order.commission_rate = 0.0
+
