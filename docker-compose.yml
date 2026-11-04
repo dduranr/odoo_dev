@@ -6,8 +6,8 @@ services:
       - "8069:8069"
     environment:
       - HOST=shared_postgres_18
-      - USER=odoo
-      - PASSWORD=odoo_password
+      - USER=postgres18
+      - PASSWORD=contraseña
     volumes:
       - odoo-dev-data:/var/lib/odoo
       - ./custom-addons:/mnt/extra-addons

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    =============================================================================
+    ARCHIVO: views/res_config_settings_views.xml
+    PROPÓSITO GENERAL:
+    Este archivo hereda la vista estándar de configuración de ventas (`sale.res_config_settings_view_form`)
+    para inyectar un nuevo bloque y campo (`sale_commission_percentage`) dentro de la sección
+    de Catálogo de Productos, permitiendo al usuario cambiar el porcentaje general del 5%.
+
+    MECANISMO DE HERENCIA Y UBICACIÓN EN ODOO:
+    
+    1. ¿Cómo funciona la herencia de vistas en Odoo?
+       - `<field name="inherit_id" ref="sale.res_config_settings_view_form"/>`:
+         Le indica a Odoo que esta vista no es independiente, sino que va a "envolver"
+         o modificar la vista estándar de configuración del módulo de ventas de Odoo.
+    
+    2. ¿Cómo se ubica la opción dentro de una sección específica (ej. "Product Catalog")?
+       - La herencia por sí sola solo dice "modifica este formulario". Lo que determina
+       exactamente en qué sección o bloque se coloca el campo es el selector **XPath**:
+         `<xpath expr="//block[@name='catalog_setting_container']" position="inside">`
+       - El motor de Odoo busca el bloque HTML/XML que tiene el atributo `name="catalog_setting_container"`
+         (el cual pertenece a la sección "Product Catalog" definida por Odoo en el módulo de ventas)
+         y coloca nuestro elemento `<setting>` justamente **dentro** (`position="inside"`) de ese bloque.
+    
+    3. ¿Cómo ubicarlo en otra sección (ej. "Quotations & Orders")?
+       - Si quisieras moverlo a otra sección, solo tendrías que cambiar el `expr` del XPath
+         apuntando al nombre del contenedor de esa sección (por ejemplo, `quotation_order_setting_container`).
+    =============================================================================
+    -->
+
+    <record id="res_config_settings_view_form_inherit_duran_commission" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.duran.commission</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Selector XPath que localiza la sección "Product Catalog" e inserta nuestro ajuste -->
+            <xpath expr="//block[@name='catalog_setting_container']" position="inside">
+                <setting id="sale_commission_percentage_setting" 
+                         help="Porcentaje de comisión general aplicable por defecto a todos los productos y servicios.">
+                    <field name="sale_commission_percentage"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+
+
+
+
+
+
+
+
