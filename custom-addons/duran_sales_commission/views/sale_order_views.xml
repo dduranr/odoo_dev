@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!--
+    =============================================================================
+    ARCHIVO: views/sale_order_views.xml
+    PROPÓSITO DIDÁCTICO:
+    Este archivo hereda el formulario estándar de órdenes de venta (`sale.view_order_form`)
+    para añadir:
+      1. Las columnas de porcentaje (`commission_percentage`) y monto (`commission_amount`)
+         dentro de la tabla de líneas de la orden (`order_line`).
+      2. Un grupo o sección de resumen de comisiones (*Resumen de Comisiones de Venta*)
+         mostrando el vendedor asignado, la tasa ponderada y el total de la comisión.
+    =============================================================================
+    -->
 
     <record id="view_order_form_inherit_duran_commission" model="ir.ui.view">
         <field name="name">sale.order.form.inherit.duran.commission</field>
@@ -28,3 +40,4 @@
     </record>
 
 </odoo>
+

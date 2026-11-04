@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!--
+    =============================================================================
+    ARCHIVO: views/commission_rule_views.xml
+    PROPÓSITO DIDÁCTICO:
+    Este archivo define las **Vistas de Interfaz (UI)** para el modelo de excepciones
+    de comisiones (`duran.commission.rule`). 
+    Contiene:
+      1. La vista Formulario (para crear/editar reglas individuales).
+      2. La vista Lista / Tree (editable en línea).
+      3. La vista de Búsqueda (filtros y agrupaciones).
+      4. La Acción de Ventana (act_window) y el Elemento de Menú en Ventas > Configuración.
+    =============================================================================
+    -->
 
     <!-- Vista Formulario de Reglas de Comisión -->
     <record id="view_duran_commission_rule_form" model="ir.ui.view">
@@ -80,4 +93,5 @@
               sequence="50"/>
 
 </odoo>
+
 

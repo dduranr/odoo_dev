@@ -1,10 +1,24 @@
 # -*- coding: utf-8 -*-
+"""
+=============================================================================
+ARCHIVO: commission_rule.py
+PROPÓSITO DIDÁCTICO:
+Este archivo es un **Modelo de Negocio Personalizado** (nuevo modelo `duran.commission.rule`).
+Contiene la lógica CRUD y restricciones en base de datos para permitir al 
+administrador configurar excepciones de comisiones por producto específico.
+=============================================================================
+"""
+
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 
 class DuranCommissionRule(models.Model):
-    """Modelo para la configuración de reglas de comisión excepcionales por producto."""
+    """
+    Modelo para la configuración de reglas de comisión excepcionales por producto.
+    Permite al administrador asignar porcentajes de comisión personalizados superiores
+    al estándar para incentivar ventas de gama alta.
+    """
 
     _name = 'duran.commission.rule'
     _description = 'Regla de Comisión por Producto'
@@ -42,8 +56,15 @@ class DuranCommissionRule(models.Model):
 
     @api.constrains('commission_percentage')
     def _check_commission_percentage(self):
-        """Valida que el porcentaje de comisión esté entre 0 y 100."""
+        """
+        Valida que el porcentaje de comisión configurado esté dentro del rango válido (0% - 100%).
+
+        Raises:
+            ValidationError: Si el porcentaje es menor a 0.0 o mayor a 100.0.
+        """
         for record in self:
             if record.commission_percentage < 0.0 or record.commission_percentage > 100.0:
                 raise ValidationError('El porcentaje de comisión debe estar comprendido entre 0% y 100%.')
+
+
 

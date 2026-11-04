@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!--
+    =============================================================================
+    ARCHIVO: security/ir.model.access.xml
+    PROPÓSITO DIDÁCTICO:
+    Este archivo define los **Permisos de Acceso** (Control Access List - ACL) en Odoo 20.
+    Determina qué grupos de usuarios (ej. Vendedores vs Gerentes de Ventas) pueden
+    leer (r), crear, modificar o eliminar registros del modelo 'duran.commission.rule'.
+    Sin este archivo, Odoo bloqueará el acceso a las tablas por motivos de seguridad.
+    =============================================================================
+    -->
     <data noupdate="1">
+        <!-- Permiso de solo lectura para los Vendedores -->
         <record id="access_duran_commission_rule_user" model="ir.access">
             <field name="name">duran.commission.rule.user</field>
             <field name="model_id" ref="model_duran_commission_rule"/>
@@ -8,6 +19,7 @@
             <field name="operation">r</field>
         </record>
 
+        <!-- Permiso CRUD completo para los Gerentes de Ventas -->
         <record id="access_duran_commission_rule_manager" model="ir.access">
             <field name="name">duran.commission.rule.manager</field>
             <field name="model_id" ref="model_duran_commission_rule"/>
@@ -16,4 +28,5 @@
         </record>
     </data>
 </odoo>
+
 
