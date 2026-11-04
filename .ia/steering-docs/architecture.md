@@ -9,7 +9,7 @@ Este documento define la topología física del entorno para evitar que el agent
 
 ## Distribución de Servicios
 1. **PostgreSQL 18:** /Users/duran/Projects/www/shared/postgres-18
-2. **Odoo:** /Users/duran/Projects/www/odoo-dev
+2. **Odoo 20:** /Users/duran/Projects/www/odoo-dev
 
 ## Visibilidad del Sistema de Archivos
 * La IA solo tiene acceso directo al sistema de archivos del host en la ruta: /Users/duran/Projects/www/odoo-dev/.
