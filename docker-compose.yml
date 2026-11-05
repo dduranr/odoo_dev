@@ -5,6 +5,7 @@ services:
     ports:
       - "8069:8069"
     environment:
+      - TZ=America/Mexico_City
       - HOST=shared_postgres_18
       - USER=postgres18
       - PASSWORD=contraseña
