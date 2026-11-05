@@ -1,18 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-=============================================================================
-ARCHIVO: __manifest__.py
-PROPÓSITO DIDÁCTICO:
-El manifiesto es el "acta de nacimiento" y descriptor principal de un módulo en Odoo.
-Define metadatos esenciales como:
-  - name / summary / description: Información descriptiva del módulo.
-  - category / author / website: Clasificación y autoría.
-  - depends: Lista de módulos prerrequisitos que deben instalarse antes (ej. 'sale_management').
-  - data: Lista de archivos de seguridad, modelos y vistas XML que Odoo cargará al instalarse.
-  - installable / application: Indica si es un módulo ejecutable como aplicación principal.
-=============================================================================
-"""
-
 {
     'name': 'Duran Sales Commission',
     'version': '20.0.1.0.0',
